@@ -120,18 +120,9 @@
         }
 
       ];
-      var gallery;
+      
       Galleria.loadTheme('../js/galleria_theme/classic/galleria.classic.js');
-      Galleria.run('#galleria', {
-        dataSource: data
-        ,autoplay: 5000
-        ,height: 0.5
-        //,thumbnails: "numbers"
-        ,extend: function() {
-          gallery = this;
-        }
-      });
-
+      
       var jRes = jRespond([
         {
           label: 'handheld',
@@ -143,23 +134,29 @@
           exit: 10000
         }
       ]);
-      OB
+        
       jRes.addFunc({
         breakpoint: 'handheld',
         enter: function() {
-          alert('handheld');
-          if(gallery){
-            gallery.setOptions("height", 0.8);
-            console.log(gallery);
-          }
+          $("#galleria").empty();
+          Galleria.run('#galleria', {
+            dataSource: data
+            ,autoplay: 5000
+            ,height: 0.8
+            ,thumbnails: true
+          });
         },
         exit: function() {
-          alert('desktop');
-          if(gallery){
-            gallery.setOptions("height", 0.5);
-            console.log(gallery);
-          }
+          $("#galleria").empty();
+          Galleria.loadTheme('../js/galleria_theme/classic/galleria.classic.js');
+          Galleria.run('#galleria', {
+            dataSource: data
+            ,autoplay: 5000
+            ,height: 0.6
+            ,thumbnails: false
+          });
         }
+          
       });
 
     </script>
